@@ -1,5 +1,6 @@
 import re
 import time
+import subprocess
 from collections import defaultdict
 
 failed_attempts = defaultdict(int)
@@ -15,5 +16,6 @@ with open("/var/log/auth.log", "r") as file:
 					failed_attempts[ip] += 1
 					if failed_attempts[ip] >= 5:
 						print(f"ALERT: {ip} has {failed_attempts[ip]} failed attempts.")
+						subprocess.run(["sudo", "iptables", "-A", "INPUT", "-s", ip, "-p", "tcp", "--dport", "22", "-j", "DROP"])
 		else:
 			time.sleep(1)
