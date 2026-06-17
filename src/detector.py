@@ -4,6 +4,7 @@ import subprocess
 from collections import defaultdict
 
 failed_attempts = defaultdict(int)
+whitelist = ["192.168.64.1"]
 with open("/var/log/auth.log", "r") as file:
 	file.seek(0, 2)
 	while True:
@@ -13,6 +14,8 @@ with open("/var/log/auth.log", "r") as file:
 				match = re.search(r'from (\d+\.\d+\.\d+\.\d+)', line)
 				if match:
 					ip = match.group(1)
+					if ip in whitelist:
+                                        	continue
 					failed_attempts[ip] += 1
 					if failed_attempts[ip] >= 5:
 						print(f"ALERT: {ip} has {failed_attempts[ip]} failed attempts.")
