@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 failed_attempts = defaultdict(int)
 blocked_ips = {}
-whitelist = []
+whitelist = ["192.168.64.1"]
 duration = timedelta(hours = 24)
 with open("/var/log/auth.log", "r") as file:
 	file.seek(0, 2)
