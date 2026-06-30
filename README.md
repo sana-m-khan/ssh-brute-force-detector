@@ -20,7 +20,6 @@ If you need this tool, it means your SSH server has password authentication enab
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
-- [Security Note](#security-note)
 - [Project Structure](#project-structure)
 
 ---
